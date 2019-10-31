@@ -4,6 +4,7 @@ Rails.application.routes.draw do
    resources :gossips
    resources :author
    resources :cities
+   resources :sessions, only: [:new, :create, :destroy]
 
    root 'gossips#index'
    get '/static_pages/team', to: 'static_pages#team', as: 'team'

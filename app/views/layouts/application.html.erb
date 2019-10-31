@@ -16,7 +16,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <
+    
+
+
+    <!-- le petit jumbotron -->
      <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">The Gossip Project</h1>
@@ -24,10 +27,11 @@
   </div>
 </div>
 
-    <!-- NavBar --!>
+
+    <!-- NavBar -->
 
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" <%= link_to "THP - Montpellier", gossips_path %></a>
+      <a class="navbar-brand" <%= link_to "THP - Montpellier", gossips_path %>  </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,12 +39,54 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" <%= link_to "Team", team_path %></a>
+            <a class="nav-link" <%= link_to "Team", team_path %> </a>
           </li>
           <li class="nav-item">
-        <a class="nav-link" <%= link_to "Contact", contact_path %></a>
+        <a class="nav-link" <%= link_to "Contact", contact_path %> </a>
           </li>
+
+         
+            
+            <%if current_user%> 
+
+            <li class="nav-item">
+            <a class="nav-link" <%= link_to "Se déconnecter", session_path(session.id), method: :delete %> </a>
+            </li>
+
+             <% else %>
+
+             <!-- Le petit bouton -->
+
+            <li class="nav-item">
+            <a class="nav-link" <%= link_to "Créer un compte", new_author_path %> </a>
+            </li>
+
+            <li class="nav-item">
+            <a class="nav-link" <%= link_to "Se connecter", new_session_path %> </a>
+            </li>
+
+
+            <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mes options
+            
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" <%= link_to "Créer un compte", new_author_path %> </a>
+                <a class="dropdown-item" <%= link_to "Se connecter", new_session_path %> </a>
+               </button>
+
+                
+              </div>
+            </div>
+          
+
+
+            <% end %>  
+
+
         </ul>
+
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -50,6 +96,8 @@
     <br><br><br>
 
     <%= yield %>
+
+
 
   </body>
 </html>

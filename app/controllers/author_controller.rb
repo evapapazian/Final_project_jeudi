@@ -11,12 +11,19 @@ end
 
 def new
   # Méthode qui crée un potin vide et l'envoie à une view qui affiche le formulaire pour 'le remplir' (new.html.erb)
+  @user = User.new 
 end
 
 def create
-  # Méthode qui créé un potin à partir du contenu du formulaire de new.html.erb, soumis par l'utilisateur
-  # pour info, le contenu de ce formulaire sera accessible dans le hash params (ton meilleur pote)
-  # Une fois la création faite, on redirige généralement vers la méthode show (pour afficher le potin créé)
+  nb= rand(1..10)
+  @user = User.create(first_name: params[:first_name], last_name: params[:last_name], description: params[:description], age: params[:age], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], city_id: nb )
+
+if @user.save 
+  redirect_to gossips_path
+else 
+
+  render 'new'
+end
 end
 
 def edit

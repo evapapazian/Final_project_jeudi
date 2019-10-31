@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_172622) do
+ActiveRecord::Schema.define(version: 2019_10_31_104043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,27 @@ ActiveRecord::Schema.define(version: 2019_10_28_172622) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "zip_code"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "gossip_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_comments_on_comment_id"
+    t.index ["gossip_id"], name: "index_comments_on_gossip_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "gossip_tags", force: :cascade do |t|
+    t.bigint "gossip_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gossip_id"], name: "index_gossip_tags_on_gossip_id"
+    t.index ["tag_id"], name: "index_gossip_tags_on_tag_id"
   end
 
   create_table "gossips", force: :cascade do |t|
@@ -29,12 +50,38 @@ ActiveRecord::Schema.define(version: 2019_10_28_172622) do
     t.index ["user_id"], name: "index_gossips_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "gossip_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_likes_on_comment_id"
+    t.index ["gossip_id"], name: "index_likes_on_gossip_id"
+  end
+
   create_table "message_prives", force: :cascade do |t|
     t.bigint "recipient_id"
     t.bigint "sender_id"
     t.text "content"
     t.index ["recipient_id"], name: "index_message_prives_on_recipient_id"
     t.index ["sender_id"], name: "index_message_prives_on_sender_id"
+  end
+
+  create_table "private_messages", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sender_id"], name: "index_private_messages_on_sender_id"
+  end
+
+  create_table "recipient_lists", force: :cascade do |t|
+    t.bigint "private_message_id"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["private_message_id"], name: "index_recipient_lists_on_private_message_id"
+    t.index ["recipient_id"], name: "index_recipient_lists_on_recipient_id"
   end
 
   create_table "tag_gossips", force: :cascade do |t|
@@ -55,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_172622) do
     t.string "email"
     t.integer "age"
     t.bigint "city_id"
+    t.string "password_digest"
     t.index ["city_id"], name: "index_users_on_city_id"
   end
 

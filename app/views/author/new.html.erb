@@ -1,0 +1,39 @@
+<h1> Formulaire d'inscription: ici, tu vas pouvoir rejoindre la communauté des potins ! </h1>
+
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+   <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+
+      <%= label_tag 'Ton prénom' %>
+      <%= text_field_tag 'first_name'%>
+      <br /> <br />
+
+       <%= label_tag 'Ton nom de famille' %>
+      <%= text_field_tag 'last_name'%>
+      <br /> <br />
+
+       <%= label_tag 'Ton âge' %>
+      <%= text_field_tag 'age'%>
+      <br /> <br />
+
+      <%= label_tag 'Décris toi en quelques mots' %>
+      <%= text_field_tag 'description'%>
+      <br /> <br />
+
+
+       <%= label_tag 'Ton email' %>
+      <%= text_field_tag 'email'%>
+      <br /> <br />
+
+       <%= label_tag 'Ton mot de passe' %>
+      <%= password_field_tag 'password'%>
+      <br /> <br />
+
+       <%= label_tag 'Confirme ton mot de passe' %>
+      <%= password_field_tag 'password_confirmation'%>
+      <br /> <br />
+
+
+
+      <%= submit_tag "Je m'inscris!" %>
+
+    <% end %>
