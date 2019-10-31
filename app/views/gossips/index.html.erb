@@ -9,9 +9,13 @@
       <div class="card-body">
         <h5 class="card-title"><%= @user.find(t.user_id).first_name%></h5>
         <p class="card-text"><%= t.content %></p>
+
+      
         <a class="btn btn-outline-danger" href="<%= gossip_path(t) %>">Continue</a>
-        <a href="<%= gossip_path(t) %>" class="btn btn-danger" data-confirm="Êtes vous sûr de vouloir supprimer ce gossip?" data-method="DELETE">Supprimer</a>
-        
+
+       
+
+
       </div>
     </div>
   </div>

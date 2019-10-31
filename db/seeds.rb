@@ -47,3 +47,5 @@ end
 	m.recipient = u.sample
 	m.save
 end
+
+password: "mot de passe"

@@ -1,11 +1,11 @@
 
 
-<div style= "margin -left: 500px;"">
+<div style= text-center>
 
 
   <% tab_date = ["13/01/2019", "25/11/2007", "12/09/2018", "23/05/2006"] %>
 
-Bienvenue sur la page du potin!
+<h1> Bienvenue sur la page du potin! </h1>
 
 
     <div class="card text-center" style="width: 18rem;">
@@ -15,13 +15,15 @@ Bienvenue sur la page du potin!
         <p class="card-text"><%= @gossip.content %></p>
         <p class="card-link"><%= link_to "Ville", city_path(@gossip.user.id) %> </p>
         <p class="card-link"><%= link_to @user.find(@gossip.user_id).first_name ,author_path(@gossip.user_id)%> </p>
+        <% if current_user && (session[:user_id] == @gossip.user_id) %>
         <p class="card-link"><%= link_to "Editer le potin", edit_gossip_path %>
-
+           
         <%= form_tag url_for(action: 'destroy'), method: "DELETE" do %>
-		<%= submit_tag 'Supprimer' %>
-		<% end %> 
-	</p>
-      </div>
+    		<%= submit_tag 'Supprimer' %>
+    		<% end %> 
+        <% end %> 
+    	</p>
+          </div>
+        </div>
     </div>
-</div>
 
