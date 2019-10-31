@@ -1,3 +1,13 @@
+Semaine 5, Jour 4
+
+Pour lancer l'appli:
+1- Cloner le repo
+2- $ rails db: setup
+3- $ rails s
+4- aller sur http://localhost:3000/gossips, créer un compte et lancez vos gossips!
+
+
+
 
 Projet : Gossip Project : Facebook style
 
